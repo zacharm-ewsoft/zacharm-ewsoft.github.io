@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marek Zacharewicz — Portfolio</title>
+    <meta name="description" content="Python, Django, Vue, Flutter developer. Open-source tools, SaaS platforms, and internal systems.">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
+            background: #0a0e17;
+            color: #e2e8f0;
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        a { color: #22d3ee; text-decoration: none; transition: color 0.2s; }
+        a:hover { color: #67e8f9; }
+
+        /* Header */
+        .header {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 80px 24px 40px;
+            text-align: center;
+        }
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            letter-spacing: -1px;
+            color: #f8fafc;
+        }
+        .header .subtitle {
+            font-size: 1.1rem;
+            color: #64748b;
+            margin-top: 8px;
+            font-weight: 400;
+        }
+        .header .links {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        .header .links a {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            color: #94a3b8;
+            font-size: 0.9rem;
+            transition: color 0.2s;
+        }
+        .header .links a:hover { color: #22d3ee; }
+        .header .links svg { width: 18px; height: 18px; }
+
+        /* Projects grid */
+        .projects {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px 24px 60px;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 24px;
+        }
+
+        .card {
+            background: #111827;
+            border: 1px solid #1e293b;
+            border-radius: 12px;
+            padding: 32px;
+            transition: border-color 0.3s, transform 0.2s;
+        }
+        .card:hover {
+            border-color: #0891b2;
+            transform: translateY(-2px);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 16px;
+            margin-bottom: 12px;
+        }
+        .card h2 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #f1f5f9;
+        }
+        .card .description {
+            color: #94a3b8;
+            font-size: 0.95rem;
+            margin-bottom: 16px;
+        }
+
+        .badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+        .badge {
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 4px 10px;
+            border-radius: 6px;
+            background: #1e293b;
+            color: #94a3b8;
+        }
+        .badge.python { background: #1e3a5f; color: #60a5fa; }
+        .badge.django { background: #14532d; color: #4ade80; }
+        .badge.vue { background: #064e3b; color: #34d399; }
+        .badge.flutter { background: #1e3a5f; color: #38bdf8; }
+        .badge.pypi { background: #3b1764; color: #c084fc; }
+        .badge.live { background: #0c4a3e; color: #2dd4bf; }
+        .badge.internal { background: #44403c; color: #a8a29e; }
+        .badge.saas { background: #312e81; color: #818cf8; }
+
+        .card-links {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+        .card-links a {
+            font-size: 0.85rem;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .card-links svg { width: 15px; height: 15px; }
+
+        .features {
+            margin: 12px 0 16px;
+            padding-left: 0;
+            list-style: none;
+        }
+        .features li {
+            color: #94a3b8;
+            font-size: 0.9rem;
+            padding: 3px 0;
+            padding-left: 20px;
+            position: relative;
+        }
+        .features li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 11px;
+            width: 8px;
+            height: 8px;
+            border-radius: 2px;
+            background: #0891b2;
+        }
+
+        /* Screenshot placeholder */
+        .screenshot {
+            width: 100%;
+            height: 180px;
+            border-radius: 8px;
+            margin-bottom: 16px;
+            background: linear-gradient(135deg, #0c1425 0%, #0a1628 40%, #0d1f3c 100%);
+            border: 1px solid #1e293b;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+        }
+        .screenshot img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+        .screenshot .placeholder {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            color: #334155;
+        }
+        .screenshot .placeholder svg { width: 40px; height: 40px; opacity: 0.5; }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 40px 24px;
+            color: #475569;
+            font-size: 0.8rem;
+            border-top: 1px solid #1e293b;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        @media (min-width: 640px) {
+            .projects { grid-template-columns: repeat(2, 1fr); }
+            .card.featured { grid-column: span 2; }
+        }
+    </style>
+</head>
+<body>
+
+<header class="header">
+    <h1>Marek Zacharewicz</h1>
+    <p class="subtitle">Python &middot; Django &middot; Vue &middot; Flutter</p>
+    <div class="links">
+        <a href="https://github.com/zacharm-ewsoft" target="_blank">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+            GitHub
+        </a>
+        <a href="https://pypi.org/user/zacharm/" target="_blank">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0L1.5 6v12L12 24l10.5-6V6L12 0zm-.5 18.5L4 14.25V9.5l7.5 4.25v4.75zm1-6.25L5 8l7.5-4.25L20 8l-7.5 4.25z"/></svg>
+            PyPI
+        </a>
+        <a href="mailto:marek@infortel.pl">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+            Email
+        </a>
+    </div>
+</header>
+
+<main class="projects">
+
+    <!-- NIS2Pilot — featured -->
+    <article class="card featured">
+        <div class="card-header">
+            <h2>NIS2Pilot</h2>
+        </div>
+        <div class="badges">
+            <span class="badge saas">SaaS</span>
+            <span class="badge live">Live</span>
+            <span class="badge django">Django 6</span>
+            <span class="badge vue">Vue 3</span>
+            <span class="badge python">Python</span>
+        </div>
+        <div class="screenshot">
+            <img src="img/nis2pilot.png" alt="NIS2Pilot — platforma zgodności z NIS2"
+                 onerror="this.style.display='none';this.parentElement.querySelector('.placeholder').style.display='flex'">
+            <div class="placeholder" style="display:none">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                <span>nis2pilot.pl</span>
+            </div>
+        </div>
+        <p class="description">
+            Platforma SaaS pomagająca polskim firmom w zgodności z dyrektywą NIS2 i ustawą o krajowym systemie cyberbezpieczeństwa (UKSC).
+            Prowadzi informatyka za rękę — od samoidentyfikacji podmiotu, przez audyt 21 kontroli bezpieczeństwa, po generowanie raportów PDF.
+        </p>
+        <ul class="features">
+            <li>Inteligentny analizator logów — parsuje logi FortiGate, ESET, Windows i MikroTik bezpośrednio w przeglądarce (zero-knowledge, surowe dane nie opuszczają komputera), a AI mapuje wyniki na kontrole Art. 21 UKSC</li>
+            <li>Płatności online PayU — checkout z obsługą firm i instytucji publicznych</li>
+            <li>Automatyczne fakturowanie — integracja z programem księgowym Merit Aktiva (360 Księgowość), faktury z działami, rejestracja płatności i wysyłka email</li>
+            <li>AI czat asystent NIS2 — odpowiada na pytania klientów w kontekście ustawy UKSC, z cytatami z bazy prawnej</li>
+            <li>W przygotowaniu: stacjonarny agent monitorujący — instalowany w sieci klienta, zbiera dane z Wazuh/FortiGate/AD i synchronizuje zanonimizowane wyniki z dashboardem chmurowym</li>
+        </ul>
+        <div class="card-links">
+            <a href="https://nis2pilot.pl" target="_blank">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                nis2pilot.pl
+            </a>
+        </div>
+    </article>
+
+    <!-- merit-activa-api -->
+    <article class="card">
+        <div class="card-header">
+            <h2>merit-activa-api</h2>
+        </div>
+        <div class="badges">
+            <span class="badge pypi">PyPI</span>
+            <span class="badge python">Python</span>
+        </div>
+        <p class="description">
+            Biblioteka Python do API programu księgowego Merit Aktiva / 360 Księgowość.
+            Automatyczne wystawianie faktur, zarządzanie klientami, rejestracja płatności, obsługa działów — 60+ endpointów API.
+            Idealna do integracji z platformami SaaS i e-commerce.
+        </p>
+        <div class="card-links">
+            <a href="https://pypi.org/project/merit-activa-api/" target="_blank">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 0L1.5 6v12L12 24l10.5-6V6L12 0z"/></svg>
+                PyPI
+            </a>
+            <a href="https://github.com/zacharm-ewsoft/360ksiegowoscAPI" target="_blank">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                GitHub
+            </a>
+        </div>
+    </article>
+
+    <!-- IT Quiz -->
+    <article class="card">
+        <div class="card-header">
+            <h2>IT Interview Quiz</h2>
+        </div>
+        <div class="badges">
+            <span class="badge python">Python</span>
+        </div>
+        <p class="description">
+            Quiz techniczny do przygotowania na rozmowy kwalifikacyjne IT.
+            Python, Django, SQL, REST API, Linux, Git — pytania dwujęzyczne PL/EN.
+        </p>
+        <div class="card-links">
+            <a href="https://github.com/zacharm-ewsoft/it-quiz" target="_blank">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                GitHub
+            </a>
+        </div>
+    </article>
+
+    <!-- Muzeum Rolnictwa -->
+    <article class="card">
+        <div class="card-header">
+            <h2>Muzeum Rolnictwa — Stoiska</h2>
+        </div>
+        <div class="badges">
+            <span class="badge internal">Aplikacja wewnętrzna</span>
+            <span class="badge django">Django</span>
+        </div>
+        <p class="description">
+            Wewnętrzna aplikacja do zarządzania rezerwacjami stoisk wystawienniczych
+            dla Muzeum Rolnictwa w Ciechanowcu. Obsługa ekspozycji, harmonogramów
+            i interaktywnych stanowisk.
+        </p>
+    </article>
+
+</main>
+
+<footer class="footer">
+    &copy; 2026 Marek Zacharewicz &middot; <a href="https://infortel.pl" target="_blank">Infortel Sp. z o.o.</a>
+</footer>
+
+</body>
+</html>
